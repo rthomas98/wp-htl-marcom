@@ -3,6 +3,21 @@
  */
 
 /**
+ * Custom base styles.
+ *
+ * These will be added immediately before Tailwind's `base` layer.
+ */
+
+@layer base {
+    :root {
+        --color-cod-gray: #141414;
+        --color-pippin: #FFE8E5;
+        --color-mine-shaft: #222222;
+        --color-gallery: #F0F0F0;
+    }
+}
+
+/**
  * This uses the background and foreground colors declared in the `theme.json`
  * file and is applied both to the front end and in the block editor.
  */

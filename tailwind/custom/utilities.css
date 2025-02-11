@@ -6,3 +6,45 @@
  *
  * https://tailwindcss.com/docs/adding-custom-styles#adding-custom-utilities
  */
+
+/**
+ * Custom utilities.
+ *
+ * These will be added immediately after Tailwind's `utilities` layer.
+ */
+
+@layer utilities {
+    /* Typography utilities */
+    .text-balance {
+        text-wrap: balance;
+    }
+
+    /* Custom color utilities */
+    .text-cod-gray {
+        color: var(--color-cod-gray);
+    }
+    .bg-cod-gray {
+        background-color: var(--color-cod-gray);
+    }
+
+    .text-pippin {
+        color: var(--color-pippin);
+    }
+    .bg-pippin {
+        background-color: var(--color-pippin);
+    }
+
+    .text-mine-shaft {
+        color: var(--color-mine-shaft);
+    }
+    .bg-mine-shaft {
+        background-color: var(--color-mine-shaft);
+    }
+
+    .text-gallery {
+        color: var(--color-gallery);
+    }
+    .bg-gallery {
+        background-color: var(--color-gallery);
+    }
+}

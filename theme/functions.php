@@ -145,7 +145,10 @@ add_action( 'widgets_init', '_htl_widgets_init' );
  * Enqueue scripts and styles.
  */
 function _htl_scripts() {
-	wp_enqueue_style( '_htl-style', get_stylesheet_uri(), array(), _HTL_VERSION );
+    // Enqueue fonts
+    wp_enqueue_style('htl-fonts', get_template_directory_uri() . '/css/fonts.css', array(), _HTL_VERSION);
+    
+    wp_enqueue_style( '_htl-style', get_stylesheet_uri(), array(), _HTL_VERSION );
 	wp_enqueue_script( '_htl-script', get_template_directory_uri() . '/js/script.min.js', array(), _HTL_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -195,3 +198,9 @@ require get_template_directory() . '/inc/template-tags.php';
  * Functions which enhance the theme by hooking into WordPress.
  */
 require get_template_directory() . '/inc/template-functions.php';
+
+// Icon functions.
+require get_template_directory() . '/inc/icon-functions.php';
+
+// ACF Blocks registration.
+require get_template_directory() . '/inc/blocks.php';

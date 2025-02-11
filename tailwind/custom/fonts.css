@@ -3,3 +3,12 @@
  *
  * These will be added immediately before Tailwind’s `base` layer.
  */
+
+/* Import fonts in the base layer */
+@layer base {
+    /* Poppins font */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    /* Heebo font */
+    @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap');
+}
