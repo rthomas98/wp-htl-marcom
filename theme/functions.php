@@ -318,8 +318,8 @@ require get_template_directory() . '/inc/customizer.php';
 // Icon functions.
 require get_template_directory() . '/inc/icon-functions.php';
 
-// ACF Blocks registration.
-require get_template_directory() . '/inc/blocks.php';
-
 // Include custom mega menu walker
 require_once get_template_directory() . '/inc/class-htl-mega-menu-walker.php';
+
+// Include ACF Blocks registration
+require_once get_template_directory() . '/inc/blocks.php';

@@ -24,3 +24,70 @@
 body {
 	@apply bg-background text-foreground font-sans;
 }
+
+@layer utilities {
+    .gallery-preload {
+        opacity: 0;
+        animation: fade-in 0.5s ease-out forwards;
+    }
+
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .gallery-column {
+        position: relative;
+        height: 200%;
+        transform: translateY(-25%);
+    }
+
+    .animate-loop-vertically-top {
+        animation: loop-vertically-top 90s linear infinite;
+        will-change: transform;
+    }
+
+    .animate-loop-vertically-bottom {
+        animation: loop-vertically-bottom 90s linear infinite;
+        will-change: transform;
+        transform: translateY(-50%);
+    }
+
+    @keyframes loop-vertically-top {
+        0% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY(-100%);
+        }
+    }
+
+    @keyframes loop-vertically-bottom {
+        0% {
+            transform: translateY(-50%);
+        }
+        50% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY(-50%);
+        }
+    }
+
+    .column-offset-1 {
+        margin-top: -20%;
+    }
+    .column-offset-2 {
+        margin-top: -50%;
+    }
+    .column-offset-4 {
+        margin-top: -30%;
+    }
+    .column-offset-5 {
+        margin-top: -20%;
+    }
+}
