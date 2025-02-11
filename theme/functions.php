@@ -122,6 +122,40 @@ endif;
 add_action( 'after_setup_theme', '_htl_setup' );
 
 /**
+ * Register nav menus
+ */
+function _htl_register_nav_menus() {
+    register_nav_menus(array(
+        'primary' => __('Primary Menu', '_htl'),
+        'footer'  => __('Footer Menu', '_htl'),
+    ));
+}
+add_action('after_setup_theme', '_htl_register_nav_menus');
+
+/**
+ * Register footer menus
+ */
+function _htl_register_footer_menus() {
+    register_nav_menus(array(
+        'footer-1' => __('Footer Menu 1', '_htl'),
+        'footer-2' => __('Footer Menu 2', '_htl'),
+        'footer-legal' => __('Footer Legal Menu', '_htl'),
+    ));
+}
+add_action('after_setup_theme', '_htl_register_footer_menus');
+
+/**
+ * Add custom class to menu items
+ */
+function _htl_add_menu_li_class($classes, $item, $args) {
+    if(isset($args->add_li_class)) {
+        $classes[] = $args->add_li_class;
+    }
+    return $classes;
+}
+add_filter('nav_menu_css_class', '_htl_add_menu_li_class', 10, 3);
+
+/**
  * Register widget area.
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
@@ -148,12 +182,22 @@ function _htl_scripts() {
     // Enqueue fonts
     wp_enqueue_style('htl-fonts', get_template_directory_uri() . '/css/fonts.css', array(), _HTL_VERSION);
     
-    wp_enqueue_style( '_htl-style', get_stylesheet_uri(), array(), _HTL_VERSION );
-	wp_enqueue_script( '_htl-script', get_template_directory_uri() . '/js/script.min.js', array(), _HTL_VERSION, true );
+    // Enqueue Lucide Icons
+    wp_enqueue_script('lucide-icons', 'https://unpkg.com/lucide@latest', array(), null, true);
+    wp_enqueue_script('lucide-icons-init', 'https://unpkg.com/lucide@latest/dist/umd/lucide.min.js', array('lucide-icons'), null, true);
+    
+    // Enqueue theme styles
+    wp_enqueue_style('_htl-style', get_template_directory_uri() . '/style.css', array(), _HTL_VERSION);
+    
+    // Enqueue Fluent Forms custom styles
+    wp_enqueue_style('_htl-fluent-forms', get_template_directory_uri() . '/assets/css/fluent-forms.css', array(), _HTL_VERSION);
 
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
+    // Enqueue theme scripts
+    wp_enqueue_script('_htl-script', get_template_directory_uri() . '/js/script.min.js', array(), _HTL_VERSION, true);
+
+    if (is_singular() && comments_open() && get_option('thread_comments')) {
+        wp_enqueue_script('comment-reply');
+    }
 }
 add_action( 'wp_enqueue_scripts', '_htl_scripts' );
 
@@ -190,6 +234,73 @@ function _htl_tinymce_add_class( $settings ) {
 add_filter( 'tiny_mce_before_init', '_htl_tinymce_add_class' );
 
 /**
+ * Add social media settings to customizer
+ */
+function _htl_social_media_customizer($wp_customize) {
+    // Add Social Media Section
+    $wp_customize->add_section('social_media', array(
+        'title' => __('Social Media', '_htl'),
+        'priority' => 30,
+    ));
+
+    // Facebook
+    $wp_customize->add_setting('social_facebook', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw'
+    ));
+    $wp_customize->add_control('social_facebook', array(
+        'label' => __('Facebook URL', '_htl'),
+        'section' => 'social_media',
+        'type' => 'url'
+    ));
+
+    // Instagram
+    $wp_customize->add_setting('social_instagram', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw'
+    ));
+    $wp_customize->add_control('social_instagram', array(
+        'label' => __('Instagram URL', '_htl'),
+        'section' => 'social_media',
+        'type' => 'url'
+    ));
+
+    // X (Twitter)
+    $wp_customize->add_setting('social_x', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw'
+    ));
+    $wp_customize->add_control('social_x', array(
+        'label' => __('X (Twitter) URL', '_htl'),
+        'section' => 'social_media',
+        'type' => 'url'
+    ));
+
+    // LinkedIn
+    $wp_customize->add_setting('social_linkedin', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw'
+    ));
+    $wp_customize->add_control('social_linkedin', array(
+        'label' => __('LinkedIn URL', '_htl'),
+        'section' => 'social_media',
+        'type' => 'url'
+    ));
+
+    // YouTube
+    $wp_customize->add_setting('social_youtube', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw'
+    ));
+    $wp_customize->add_control('social_youtube', array(
+        'label' => __('YouTube URL', '_htl'),
+        'section' => 'social_media',
+        'type' => 'url'
+    ));
+}
+add_action('customize_register', '_htl_social_media_customizer');
+
+/**
  * Custom template tags for this theme.
  */
 require get_template_directory() . '/inc/template-tags.php';
@@ -199,8 +310,16 @@ require get_template_directory() . '/inc/template-tags.php';
  */
 require get_template_directory() . '/inc/template-functions.php';
 
+/**
+ * Customizer additions.
+ */
+require get_template_directory() . '/inc/customizer.php';
+
 // Icon functions.
 require get_template_directory() . '/inc/icon-functions.php';
 
 // ACF Blocks registration.
 require get_template_directory() . '/inc/blocks.php';
+
+// Include custom mega menu walker
+require_once get_template_directory() . '/inc/class-htl-mega-menu-walker.php';

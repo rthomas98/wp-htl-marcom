@@ -1,0 +1,89 @@
+/* Fluent Forms Styles */
+
+/* Newsletter Form Container */
+.ff-form-newsletter {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    gap: 1rem;
+    width: 100%;
+}
+
+@media (max-width: 640px) {
+    .ff-form-newsletter {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Input Field */
+.ff-form-newsletter .fluentform .ff-el-form-control {
+    min-height: 2.75rem;
+    width: 100%;
+    border: 1px solid var(--color-gallery);
+    background-color: white;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: var(--color-mine-shaft);
+}
+
+.ff-form-newsletter .fluentform .ff-el-form-control:focus {
+    outline: none;
+    border-color: var(--color-cod-gray);
+    ring: 2px;
+    ring-color: var(--color-cod-gray);
+}
+
+.ff-form-newsletter .fluentform .ff-el-form-control::placeholder {
+    color: var(--color-mine-shaft);
+    opacity: 0.5;
+}
+
+/* Submit Button */
+.ff-form-newsletter .fluentform .ff-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    white-space: nowrap;
+    border: 1px solid var(--color-gallery);
+    background-color: var(--color-cod-gray);
+    color: white;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    transition: all 0.2s;
+    min-height: 2.75rem;
+}
+
+.ff-form-newsletter .fluentform .ff-btn:hover {
+    background-color: var(--color-mine-shaft);
+}
+
+/* Error Messages */
+.ff-form-newsletter .fluentform .ff-el-is-error .text-danger {
+    color: #ef4444;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+/* Success Message */
+.ff-form-newsletter .fluentform .ff-message-success {
+    color: #22c55e;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+/* Hide Labels */
+.ff-form-newsletter .fluentform .ff-el-input--label {
+    display: none;
+}
+
+/* Remove Form Margins */
+.ff-form-newsletter .fluentform {
+    margin: 0;
+}
+
+/* Grid Layout Container */
+.ff-form-newsletter .ff-t-container {
+    display: contents;
+}
