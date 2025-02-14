@@ -1,0 +1,19 @@
+/* Infinite scroll animations */
+.animate-loop-vertically-top,
+.animate-loop-vertically-bottom {
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+/* Double the content for seamless looping */
+.animate-loop-vertically-top > *,
+.animate-loop-vertically-bottom > * {
+    content: "";
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.animate-loop-vertically-top > * > *,
+.animate-loop-vertically-bottom > * > * {
+    grid-row: 1 / -1;
+}

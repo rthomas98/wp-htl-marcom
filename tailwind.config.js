@@ -19,6 +19,20 @@ module.exports = {
         'gallery': '#F0F0F0',
         'white': '#FFFFFF',
       },
+      animation: {
+        'loop-vertically-top': 'loop-vertically-top 25s linear infinite',
+        'loop-vertically-bottom': 'loop-vertically-bottom 25s linear infinite',
+      },
+      keyframes: {
+        'loop-vertically-top': {
+          '0%': { transform: 'translateY(0)' },
+          '100%': { transform: 'translateY(-50%)' },
+        },
+        'loop-vertically-bottom': {
+          '0%': { transform: 'translateY(-50%)' },
+          '100%': { transform: 'translateY(0)' },
+        },
+      },
     },
     container: {
       center: true,

@@ -1,4 +1,22 @@
 <?php
+/**
+ * Register ACF Block: Hero Gallery
+ */
+
+acf_register_block_type(array(
+    'name'              => 'hero-gallery',
+    'title'            => __('Hero Gallery'),
+    'description'      => __('A hero section with animated image gallery'),
+    'render_template'  => 'theme/blocks/hero-gallery/render.php',
+    'category'         => 'htl-blocks',
+    'icon'             => 'format-gallery',
+    'keywords'         => array('hero', 'gallery', 'images'),
+    'supports'         => array(
+        'anchor' => true,
+        'align' => false,
+    ),
+));
+
 if (function_exists('acf_add_local_field_group')):
 
 acf_add_local_field_group(array(

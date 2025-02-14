@@ -10,9 +10,16 @@
 get_header();
 ?>
 
-<main id="main" class="site-main">
-    <?php the_content(); ?>
-</main>
+<section id="primary">
+    <main id="main" class="site-main">
+        <?php
+        while (have_posts()) :
+            the_post();
+            get_template_part('template-parts/content/content', 'home');
+        endwhile;
+        ?>
+    </main>
+</section>
 
 <?php
 get_footer();

@@ -1,0 +1,18 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "acf/hero-gallery",
+    "title": "Hero Gallery",
+    "description": "A hero section with animated image gallery",
+    "category": "htl-blocks",
+    "icon": "format-gallery",
+    "keywords": ["hero", "gallery", "images"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "theme/blocks/hero-gallery/render.php"
+    },
+    "supports": {
+        "anchor": true,
+        "align": false
+    }
+}

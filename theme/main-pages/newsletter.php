@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Home Page Template
+ * Template Name: Newsletter Page Template
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
@@ -12,7 +12,7 @@ get_header();
 
 <section id="primary">
     <main id="main">
-        <?php get_template_part('template-parts/content/content', 'home'); ?>
+    <?php get_template_part('template-parts/content/content', 'newsletter'); ?>
     </main>
 </section>
 
