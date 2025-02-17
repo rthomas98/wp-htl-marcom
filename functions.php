@@ -34,10 +34,30 @@ add_action('after_setup_theme', function() {
     add_theme_support('align-wide');
     add_theme_support('custom-spacing');
     add_theme_support('custom-units');
+    add_theme_support('title-tag');
+    add_theme_support('post-thumbnails');
 });
 
 // Enqueue theme assets
-add_action('wp_enqueue_scripts', function() {
+function htl_enqueue_scripts() {
     // Enqueue animations CSS
     wp_enqueue_style('htl-animations', get_template_directory_uri() . '/theme/assets/css/animations.css', array(), '1.0.0');
+}
+add_action('wp_enqueue_scripts', 'htl_enqueue_scripts');
+
+// Add Alpine.js to head
+function htl_add_alpinejs() {
+    ?>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <style>[x-cloak] { display: none !important; }</style>
+    <?php
+}
+add_action('wp_head', 'htl_add_alpinejs');
+
+// Register menus
+add_action('init', function() {
+    register_nav_menus([
+        'primary' => __('Primary Menu', 'htl'),
+        'footer'  => __('Footer Menu', 'htl'),
+    ]);
 });

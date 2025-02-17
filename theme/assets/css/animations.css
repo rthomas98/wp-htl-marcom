@@ -17,3 +17,20 @@
 .animate-loop-vertically-bottom > * > * {
     grid-row: 1 / -1;
 }
+
+@keyframes loop-vertically {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-50%);
+    }
+}
+
+.animate-loop-vertically {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    animation: loop-vertically 30s linear infinite;
+}
