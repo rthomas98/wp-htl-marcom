@@ -143,6 +143,32 @@ $logo_url = wp_get_attachment_image_src(get_theme_mod('custom_logo'), 'full');
     [data-lucide="chevron-down"] {
         transition: transform 0.3s ease-in-out;
     }
+
+    /* Mobile menu item hover states */
+    .mobile-navigation .menu-item > a {
+        background-color: transparent;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .mobile-navigation .menu-item > a:hover,
+    .mobile-navigation .menu-item > a:focus,
+    .mobile-navigation .menu-item.is-active > a {
+        background-color: #F5EBE9;
+        color: #C66E4E;
+    }
+
+    .mobile-navigation .sub-menu {
+        margin-top: 0.5rem;
+        margin-left: 1rem;
+        padding-left: 1rem;
+        border-left: 2px solid #E5E7EB;
+    }
+
+    .mobile-navigation .menu-item > a {
+        display: flex;
+        padding: 0.75rem 1rem;
+        border-radius: 0.375rem;
+    }
 }
 
 /* Desktop menu styles */

@@ -4,7 +4,7 @@
  */
 ?>
 <footer id="colophon" class="px-[5%] py-12 md:py-18 lg:py-20 bg-white">
-  <div class="container">
+  <div class="container mx-auto max-w-screen-xl">
     <div class="grid grid-cols-1 gap-x-[8vw] gap-y-12 pb-12 md:gap-y-16 md:pb-18 lg:grid-cols-[0.75fr_1fr] lg:gap-y-4 lg:pb-20">
       <div class="flex flex-col">
         <a href="<?php echo esc_url(home_url('/')); ?>" class="mb-5 md:mb-6">
