@@ -12,23 +12,23 @@ $logo_url = wp_get_attachment_image_src(get_theme_mod('custom_logo'), 'full');
 <section id="site-header" class="fixed <?php echo is_admin_bar_showing() ? 'top-8 lg:top-9' : 'top-0'; ?> z-50 w-full border-b border-gallery bg-white/95 backdrop-blur-sm transition-all duration-200">
     <div class="w-full flex items-center justify-between gap-4 px-5 md:px-8 lg:px-4 xl:px-8 2xl:px-[5%]">
         <!-- Logo Section -->
-        <div class="flex items-center gap-4 lg:w-[250px] xl:w-[280px] 2xl:w-[350px]">
+        <div class="flex items-center gap-4 lg:w-[80px] 2xl:w-[350px]">
             <a href="<?php echo esc_url(home_url('/')); ?>" class="site-logo shrink-0 py-4 lg:py-6">
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/logo/web-logo-black (2).svg" 
                      alt="<?php echo get_bloginfo('name'); ?>" 
                      class="h-10 w-auto md:h-12" />
             </a>
-            <span class="hidden whitespace-nowrap text-lg font-medium text-mine-shaft lg:text-sm xl:text-base 2xl:text-lg lg:block">Hebert-Thomas Law, PLLC</span>
+            <span class="hidden whitespace-nowrap text-lg font-medium text-mine-shaft lg:text-sm xl:block 2xl:text-lg">Hebert-Thomas Law, PLLC</span>
         </div>
 
         <!-- Desktop Navigation -->
-        <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center">
+        <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center lg:max-w-[600px] xl:max-w-none">
             <?php if (has_nav_menu('primary')) : ?>
                 <nav class="primary-navigation" role="navigation" aria-label="<?php esc_attr_e('Primary Navigation', '_htl'); ?>">
                     <?php
                     wp_nav_menu(array(
                         'theme_location' => 'primary',
-                        'menu_class' => 'flex items-center gap-3 lg:text-sm xl:text-base 2xl:gap-6',
+                        'menu_class' => 'flex items-center gap-3 lg:text-sm xl:text-base 2xl:gap-4',
                         'container' => false,
                         'walker' => new HTL_Mega_Menu_Walker()
                     ));
@@ -38,7 +38,7 @@ $logo_url = wp_get_attachment_image_src(get_theme_mod('custom_logo'), 'full');
         </div>
 
         <!-- Desktop CTA Buttons -->
-        <div class="hidden lg:flex lg:w-[250px] xl:w-[280px] 2xl:w-[350px] lg:items-center lg:justify-end lg:gap-2 xl:gap-3">
+        <div class="hidden lg:flex lg:w-[200px] xl:w-[280px] 2xl:w-[350px] lg:items-center lg:justify-end lg:gap-2 xl:gap-3">
             <a href="<?php echo esc_url(get_theme_mod('header_cta_primary_url', '#')); ?>" 
                class="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-md border border-gallery bg-white px-2.5 py-1.5 lg:text-sm xl:text-base text-mine-shaft transition-colors hover:bg-gallery xl:px-3 xl:py-2 2xl:px-4 2xl:py-2.5">
                 <?php echo esc_html(get_theme_mod('header_cta_primary_text', 'Contact Us')); ?>

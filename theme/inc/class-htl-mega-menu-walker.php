@@ -47,7 +47,7 @@ class HTL_Mega_Menu_Walker extends Walker_Nav_Menu {
             'href'   => !empty($item->url) ? $item->url : '#',
             'class'  => 'flex items-center py-2 text-mine-shaft rounded-md transition-all duration-200 whitespace-nowrap w-full' . 
                        ($depth === 0 ? ' lg:py-6 justify-between lg:inline-flex lg:space-x-2' : ' hover:bg-pippin hover:bg-opacity-10 px-3') .
-                       (in_array('current-menu-item', $classes) ? ' text-pippin' : ' hover:text-pippin')
+                       (in_array('current-menu-item', $classes) ? ' text-pippin' : '')
         );
 
         if ($args->walker->has_children) {
