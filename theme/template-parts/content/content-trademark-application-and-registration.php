@@ -115,8 +115,8 @@
     <?php if (have_rows('layout_240')) : ?>
         <?php while (have_rows('layout_240')) : the_row(); ?>
             <section id="relume" class="px-[5%] py-16 md:py-24 lg:py-28 bg-pippin">
-                <div class="container">
-                    <div class="rb-12 mx-auto mb-12 w-full max-w-lg text-center md:mb-18 lg:mb-20">
+                <div class="container mx-auto">
+                    <div class="rb-12 mx-auto mb-12 w-full text-center md:mb-18 lg:mb-20">
                         <?php if (get_sub_field('title')) : ?>
                             <h2 class="text-4xl font-bold leading-[1.2] md:text-5xl lg:text-6xl">
                                 <?php the_sub_field('title'); ?>
@@ -171,38 +171,15 @@
     <?php endif; ?>
 
     <?php if (have_rows('cards')) : ?>
-        <section id="relume" class="px-[5%] bg-white" 
-                 x-data="{ 
-                     activeSection: 0,
-                     sections: [],
-                     init() {
-                         this.sections = [...document.querySelectorAll('.scroll-section')];
-                         this.checkScroll();
-                         window.addEventListener('scroll', () => this.checkScroll());
-                         window.addEventListener('resize', () => this.checkScroll());
-                     },
-                     checkScroll() {
-                         const viewportMiddle = window.scrollY + (window.innerHeight / 2);
-                         
-                         this.sections.forEach((section, index) => {
-                             const rect = section.getBoundingClientRect();
-                             const absoluteTop = window.scrollY + rect.top;
-                             const absoluteBottom = absoluteTop + rect.height;
-                             
-                             if (viewportMiddle >= absoluteTop && viewportMiddle < absoluteBottom) {
-                                 this.activeSection = index;
-                             }
-                         });
-                     }
-                 }">
-            <div class="container">
+        <section id="relume" class="px-[5%] bg-white">
+            <div class="container mx-auto">
                 <div class="relative grid gap-x-12 py-16 sm:gap-y-12 md:grid-cols-2 md:py-0 lg:gap-x-20">
                     <div class="grid grid-cols-1 gap-12 md:block">
                         <?php 
                         $index = 0;
                         while (have_rows('cards')) : the_row(); 
                         ?>
-                            <div class="scroll-section">
+                            <div class="scroll-section" data-index="<?php echo $index; ?>">
                                 <div class="flex flex-col items-start justify-center md:h-screen">
                                     <?php if (get_sub_field('sub_title')) : ?>
                                         <p class="mb-3 font-semibold md:mb-4">
@@ -250,11 +227,8 @@
                                     <?php endif; ?>
                                 </div>
 
-                                <div class="fixed inset-0 -z-10 bg-[#e5e5e5] transition-opacity duration-300"
-                                     x-bind:class="{
-                                         'opacity-100': activeSection === <?php echo $index; ?>,
-                                         'opacity-0': activeSection !== <?php echo $index; ?>
-                                     }">
+                                <div class="fixed inset-0 -z-10 bg-[#e5e5e5] opacity-0 transition-opacity duration-300"
+                                     data-bg-section="<?php echo $index; ?>">
                                 </div>
                             </div>
                         <?php 
@@ -272,11 +246,8 @@
                                 if ($image) : ?>
                                     <img src="<?php echo esc_url($image['url']); ?>" 
                                          alt="<?php echo esc_attr($image['alt']); ?>"
-                                         class="absolute inset-0 w-full h-full object-cover transition-all duration-500"
-                                         x-bind:class="{
-                                             'opacity-100 translate-y-0': activeSection === <?php echo $index; ?>,
-                                             'opacity-0 translate-y-4': activeSection !== <?php echo $index; ?>
-                                         }" />
+                                         data-scroll-image="<?php echo $index; ?>"
+                                         class="absolute inset-0 w-full h-full object-cover opacity-0 translate-y-4 transition-all duration-500" />
                                 <?php endif; ?>
                             <?php 
                             $index++;
@@ -286,13 +257,66 @@
                     </div>
                 </div>
             </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    let activeSection = 0;
+                    const sections = document.querySelectorAll('.scroll-section');
+                    const bgSections = document.querySelectorAll('[data-bg-section]');
+                    const scrollImages = document.querySelectorAll('[data-scroll-image]');
+
+                    function checkScroll() {
+                        const viewportMiddle = window.scrollY + (window.innerHeight / 2);
+                        
+                        sections.forEach((section, index) => {
+                            const rect = section.getBoundingClientRect();
+                            const absoluteTop = window.scrollY + rect.top;
+                            const absoluteBottom = absoluteTop + rect.height;
+                            
+                            if (viewportMiddle >= absoluteTop && viewportMiddle < absoluteBottom) {
+                                if (activeSection !== index) {
+                                    activeSection = index;
+                                    updateActiveSection();
+                                }
+                            }
+                        });
+                    }
+
+                    function updateActiveSection() {
+                        // Update background sections
+                        bgSections.forEach(bg => {
+                            const bgIndex = parseInt(bg.dataset.bgSection);
+                            bg.style.opacity = bgIndex === activeSection ? '1' : '0';
+                        });
+
+                        // Update images
+                        scrollImages.forEach(img => {
+                            const imgIndex = parseInt(img.dataset.scrollImage);
+                            if (imgIndex === activeSection) {
+                                img.classList.remove('opacity-0', 'translate-y-4');
+                                img.classList.add('opacity-100', 'translate-y-0');
+                            } else {
+                                img.classList.remove('opacity-100', 'translate-y-0');
+                                img.classList.add('opacity-0', 'translate-y-4');
+                            }
+                        });
+                    }
+
+                    // Set initial state
+                    updateActiveSection();
+
+                    // Add scroll and resize listeners
+                    window.addEventListener('scroll', checkScroll);
+                    window.addEventListener('resize', checkScroll);
+                });
+            </script>
         </section>
     <?php endif; ?>
 
     <?php if (have_rows('faq_1')) : ?>
         <?php while (have_rows('faq_1')) : the_row(); ?>
             <section id="relume" class="px-[5%] py-16 md:py-24 lg:py-28">
-                <div class="container">
+                <div class="container mx-auto">
                     <div class="mx-auto max-w-lg">
                         <div class="rb-12 mb-12 text-center md:mb-18 lg:mb-20">
                             <?php if (get_sub_field('title')) : ?>
@@ -395,7 +419,7 @@
     <?php if (have_rows('cta_3')) : ?>
         <?php while (have_rows('cta_3')) : the_row(); ?>
             <section id="relume" class="relative px-[5%] py-16 md:py-24 lg:py-28">
-                <div class="container">
+                <div class="container mx-auto">
                     <div class="w-full max-w-lg">
                         <?php if (get_sub_field('title')) : ?>
                             <h2 class="mb-5 text-5xl font-bold text-white md:mb-6 md:text-4xl lg:text-6xl">

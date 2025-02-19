@@ -10,9 +10,9 @@
             <section class="grid grid-cols-1 items-center gap-8 pt-16 md:gap-12 md:pt-24 lg:grid-cols-2 lg:gap-16 lg:pt-0">
                 <div class="mx-[5%] max-w-[640px] md:justify-self-start lg:ml-[5vw] lg:mr-20 lg:justify-self-end">
                     <?php if (get_sub_field('title')) : ?>
-                        <h2 class="mb-4 text-[56px] font-bold leading-[1.1] tracking-tight md:mb-6 md:text-[72px] lg:text-[96px]">
+                        <h1 class="mb-5 text-6xl font-bold md:mb-6 md:text-6xl lg:text-7xl">
                             <?php the_sub_field('title'); ?>
-                        </h2>
+                        </h1>
                     <?php endif; ?>
 
                     <?php if (get_sub_field('content')) : ?>
@@ -70,7 +70,7 @@
                         <?php endif; ?>
 
                         <?php if (get_sub_field('title')) : ?>
-                            <h2 class="mb-5 text-[56px] font-bold leading-[1.1] tracking-tight text-white md:mb-6 md:text-[72px] lg:text-[96px]">
+                            <h2 class="mb-5 text-6xl font-bold md:mb-6 md:text-5xl lg:text-6xl text-white">
                                 <?php the_sub_field('title'); ?>
                             </h2>
                         <?php endif; ?>
@@ -125,14 +125,14 @@
     <?php if (have_rows('layout_408')) : ?>
         <?php while (have_rows('layout_408')) : the_row(); ?>
             <section class="px-[5%] py-16 md:py-24 lg:py-28">
-                <div class="container">
+                <div class="container mx-auto">
                     <div class="mx-auto mb-12 w-full max-w-lg text-center md:mb-18 lg:mb-20">
                         <?php if (get_sub_field('sub_title')) : ?>
                             <p class="mb-3 font-semibold md:mb-4"><?php the_sub_field('sub_title'); ?></p>
                         <?php endif; ?>
 
                         <?php if (get_sub_field('title')) : ?>
-                            <h2 class="mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
+                            <h2 class="mb-5 text-6xl font-bold md:mb-6 md:text-5xl lg:text6xl">
                                 <?php the_sub_field('title'); ?>
                             </h2>
                         <?php endif; ?>
@@ -157,9 +157,9 @@
                                         <?php endif; ?>
 
                                         <?php if (get_sub_field('title')) : ?>
-                                            <h2 class="mb-5 text-3xl font-bold tracking-tight md:text-5xl lg:text-6xl">
+                                            <h3 class="mb-5 text-6xl font-bold md:mb-6 md:text-4xl lg:text-5xl">
                                                 <?php the_sub_field('title'); ?>
-                                            </h2>
+                                            </h3>
                                         <?php endif; ?>
 
                                         <?php if (get_sub_field('content')) : ?>
@@ -211,7 +211,7 @@
                                         <?php endif; ?>
 
                                         <?php if (get_sub_field('title')) : ?>
-                                            <h2 class="mb-5 text-3xl font-bold tracking-tight md:text-5xl lg:text-6xl">
+                                            <h2 class="mb-5 text-6xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
                                                 <?php the_sub_field('title'); ?>
                                             </h2>
                                         <?php endif; ?>
@@ -269,7 +269,7 @@
     <?php if (have_rows('layout_458')) : ?>
         <?php while (have_rows('layout_458')) : the_row(); ?>
             <section class="overflow-hidden px-[5%] py-16 md:py-24 lg:py-28 bg-cod-gray text-white">
-                <div class="container">
+                <div class="container mx-auto">
                     <div class="rb-12 mb-12 grid auto-cols-fr grid-cols-1 items-start gap-x-5 gap-y-5 md:mb-18 md:grid-cols-2 md:gap-x-12 lg:mb-20 lg:gap-x-20 lg:gap-y-20">
                         <div class="flex h-full flex-col">
                             <?php if (get_sub_field('sub_title')) : ?>
@@ -277,7 +277,7 @@
                             <?php endif; ?>
 
                             <?php if (get_sub_field('title')) : ?>
-                                <h2 class="text-3xl font-bold tracking-tight md:text-5xl lg:text-6xl">
+                                <h2 class="mb-5 text-6xl font-bold md:mb-6 md:text-7xl lg:text-6xl">
                                     <?php the_sub_field('title'); ?>
                                 </h2>
                             <?php endif; ?>
@@ -334,9 +334,9 @@
                                     <?php endif; ?>
 
                                     <?php if (get_sub_field('title')) : ?>
-                                        <h3 class="mb-3 text-2xl font-bold md:mb-4 md:text-3xl md:leading-[1.3] lg:text-4xl">
+                                        <h2 class="mb-5 text-6xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
                                             <?php the_sub_field('title'); ?>
-                                        </h3>
+                                        </h2>
                                     <?php endif; ?>
 
                                     <?php if (get_sub_field('content')) : ?>
@@ -360,7 +360,7 @@
                     <div class="grid grid-cols-1 gap-x-20 gap-y-12 md:gap-y-16 lg:grid-cols-2 lg:items-center">
                         <div>
                             <?php if (get_sub_field('title')) : ?>
-                                <h2 class="mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
+                                <h2 class="mb-5 text-6xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
                                     <?php the_sub_field('title'); ?>
                                 </h2>
                             <?php endif; ?>
@@ -417,7 +417,7 @@
                 <div class="container mx-auto max-w-[90rem] px-5">
                     <div class="rb-12 mb-12 text-center md:mb-18 lg:mb-20">
                         <?php if (get_sub_field('title')) : ?>
-                            <h2 class="mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
+                            <h2 class="mb-5 text-6xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
                                 <?php the_sub_field('title'); ?>
                             </h2>
                         <?php endif; ?>
@@ -435,9 +435,9 @@
                                 <?php while (have_rows('faqs')) : the_row(); ?>
                                     <div>
                                         <?php if (get_sub_field('question')) : ?>
-                                            <h2 class="mb-3 text-xl font-bold md:mb-4 md:text-2xl">
+                                            <h3 class="mb-5 text-6xl font-bold md:mb-6 md:text-3xl lg:text-4xl">
                                                 <?php the_sub_field('question'); ?>
-                                            </h2>
+                                            </h3>
                                         <?php endif; ?>
 
                                         <?php if (get_sub_field('answers')) : ?>
@@ -455,9 +455,9 @@
                         <?php while (have_rows('cta_section')) : the_row(); ?>
                             <div class="mx-auto mt-12 max-w-md text-center md:mt-18 lg:mt-20">
                                 <?php if (get_sub_field('title')) : ?>
-                                    <h4 class="mb-3 text-2xl font-bold md:mb-4 md:text-3xl md:leading-[1.3] lg:text-4xl">
+                                    <h2 class="mb-5 text-6xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
                                         <?php the_sub_field('title'); ?>
-                                    </h4>
+                                    </h2>
                                 <?php endif; ?>
 
                                 <?php if (get_sub_field('content')) : ?>

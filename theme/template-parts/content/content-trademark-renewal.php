@@ -150,9 +150,9 @@
                             <?php endif; ?>
 
                             <?php if (get_sub_field('title')) : ?>
-                                <h2 class="text-5xl font-bold text-white md:text-6xl lg:text-7xl">
+                                <h1 class="text-5xl font-bold text-white md:text-6xl lg:text-7xl">
                                     <?php the_sub_field('title'); ?>
-                                </h2>
+                                </h1>
                             <?php endif; ?>
                         </div>
 

@@ -10,7 +10,7 @@
             <div class="container">
                 <div class="rb-12 mb-12 grid grid-cols-1 items-start gap-5 md:mb-18 md:grid-cols-2 md:gap-12 lg:mb-20 lg:gap-20">
                     <?php if (get_sub_field('title')) : ?>
-                        <h1 class="text-6xl font-bold text-[#0D0D0D] md:text-9xl lg:text-10xl"><?php the_sub_field('title'); ?></h1>
+                        <h1 class="text-6xl font-bold text-[#0D0D0D] md:text-6xl lg:text-7xl"><?php the_sub_field('title'); ?></h1>
                     <?php endif; ?>
                     <div class="mx-[7.5%] flex flex-col justify-end md:mt-48">
                         <?php if (get_sub_field('content')) : ?>

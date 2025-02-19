@@ -12,7 +12,7 @@
             <section id="hero" class="relative -mt-[var(--header-height,0px)]">
                 <div class="px-[5%]">
                     <div class="flex max-h-[60rem] min-h-svh items-center">
-                        <div class="container py-16 md:py-24 lg:py-28">
+                        <div class="container py-16 md:py-24 lg:py-28 mx-auto">
                             <div class="mx-auto max-w-lg text-center">
                                 <?php if (get_sub_field('title')) : ?>
                                     <h1 class="mb-5 text-4xl font-bold text-white md:mb-6 md:text-6xl lg:text-7xl">
@@ -112,7 +112,7 @@
     <?php if (have_rows('layout_239')) : ?>
         <?php while (have_rows('layout_239')) : the_row(); ?>
             <section class="px-[5%] py-16 md:py-24 lg:py-28">
-                <div class="container">
+                <div class="container mx-auto">
                     <div class="flex flex-col items-center">
                         <div class="rb-12 mb-12 text-center md:mb-18 lg:mb-20">
                             <div class="w-full">
@@ -144,7 +144,7 @@
                                         <?php endif; ?>
 
                                         <?php if (get_sub_field('title')) : ?>
-                                            <h3 class="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
+                                            <h3 class="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-3xl">
                                                 <?php the_sub_field('title'); ?>
                                             </h3>
                                         <?php endif; ?>
@@ -272,7 +272,7 @@
     <?php if (have_rows('layout_380')) : ?>
         <?php while (have_rows('layout_380')) : the_row(); ?>
             <section class="bg-[#FFE8E5] px-[5%] py-16 md:py-24 lg:py-28">
-                <div class="container">
+                <div class="container mx-auto">
                     <div class="mx-auto mb-12 w-full max-w-lg text-center md:mb-18 lg:mb-20">
                         <?php if (get_sub_field('sub_title')) : ?>
                             <p class="mb-3 font-semibold md:mb-4"><?php the_sub_field('sub_title'); ?></p>
@@ -492,7 +492,7 @@
     <?php if (have_rows('layout_245')) : ?>
         <?php while (have_rows('layout_245')) : the_row(); ?>
             <section class="bg-[#0D0D0D] px-[5%] py-16 text-white md:py-24 lg:py-28">
-                <div class="container">
+                <div class="container mx-auto">
                     <div class="flex flex-col items-start">
                         <div class="rb-12 mb-12 grid grid-cols-1 items-start justify-between gap-5 md:mb-18 md:grid-cols-2 md:gap-x-12 md:gap-y-8 lg:mb-20 lg:gap-x-20">
                             <div>
@@ -555,7 +555,7 @@
     <?php if (have_rows('cta_21')) : ?>
         <?php while (have_rows('cta_21')) : the_row(); ?>
             <section class="px-[5%] py-16 md:py-24 lg:py-28">
-                <div class="container">
+                <div class="container mx-auto">
                     <div class="rb-12 mb-12 grid grid-rows-1 items-start gap-y-5 md:mb-18 md:grid-cols-2 md:gap-x-12 md:gap-y-8 lg:mb-20 lg:gap-x-20 lg:gap-y-16">
                         <?php if (get_sub_field('title')) : ?>
                             <h2 class="text-3xl font-bold md:text-4xl lg:text-5xl"><?php the_sub_field('title'); ?></h2>
@@ -594,16 +594,95 @@
         <?php endwhile; ?>
     <?php endif; ?>
 
+    <?php if (have_rows('latest_insights')) : ?>
+        <?php while (have_rows('latest_insights')) : the_row(); ?>
+            <section id="relume" class="px-[5%] py-16 md:py-24 lg:py-28">
+                <div class="container mx-auto">
+                    <div class="mb-12 md:mb-18 lg:mb-20">
+                        <div class="w-full">
+                            <?php if (get_sub_field('sub_title')) : ?>
+                                <p class="mb-3 font-semibold md:mb-4"><?php the_sub_field('sub_title'); ?></p>
+                            <?php endif; ?>
 
-    <?php if (WP_DEBUG) : ?>
-        <div style="background: #f1f1f1; padding: 20px; margin: 20px;">
-            <h3>Debug Information:</h3>
-            <pre>
-            Post ID: <?php echo get_the_ID(); ?>
-            Template: <?php echo get_page_template_slug(); ?>
-            Has header_79: <?php echo have_rows('header_79') ? 'Yes' : 'No'; ?>
-            ACF Fields: <?php print_r(get_fields()); ?>
-            </pre>
-        </div>
+                            <?php if (get_sub_field('title')) : ?>
+                                <h2 class="rb-5 mb-5 text-5xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
+                                    <?php the_sub_field('title'); ?>
+                                </h2>
+                            <?php endif; ?>
+
+                            <?php if (get_sub_field('description')) : ?>
+                                <p class="md:text-md"><?php the_sub_field('description'); ?></p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2 md:gap-y-16 lg:grid-cols-3">
+                        <?php
+                        $args = array(
+                            'post_type' => 'post',
+                            'posts_per_page' => 3,
+                            'orderby' => 'date',
+                            'order' => 'DESC'
+                        );
+                        $latest_posts = new WP_Query($args);
+                        
+                        if ($latest_posts->have_posts()) :
+                            while ($latest_posts->have_posts()) : $latest_posts->the_post();
+                                // Get the primary category
+                                $categories = get_the_category();
+                                $category_name = !empty($categories) ? esc_html($categories[0]->name) : '';
+                                
+                                // Calculate read time (rough estimate: 200 words per minute)
+                                $content = get_the_content();
+                                $word_count = str_word_count(strip_tags($content));
+                                $read_time = ceil($word_count / 200);
+                        ?>
+                                <div class="flex size-full flex-col items-center justify-start">
+                                    <a href="<?php the_permalink(); ?>" class="mb-6 w-full">
+                                        <?php if (has_post_thumbnail()) : ?>
+                                            <?php the_post_thumbnail('large', array('class' => 'aspect-[3/2] size-full object-cover')); ?>
+                                        <?php endif; ?>
+                                    </a>
+                                    <div class="rb-4 mb-4 flex w-full items-center justify-start">
+                                        <?php if ($category_name) : ?>
+                                            <p class="mr-4 bg-background-secondary px-2 py-1 text-sm font-semibold">
+                                                <?php echo $category_name; ?>
+                                            </p>
+                                        <?php endif; ?>
+                                        <p class="inline text-sm font-semibold"><?php echo $read_time; ?> min read</p>
+                                    </div>
+                                    <div class="flex w-full flex-col items-start justify-start">
+                                        <a class="mb-2" href="<?php the_permalink(); ?>">
+                                            <h2 class="text-xl font-bold md:text-2xl"><?php the_title(); ?></h2>
+                                        </a>
+                                        <p><?php echo wp_trim_words(get_the_excerpt(), 20); ?></p>
+                                        <a href="<?php the_permalink(); ?>" 
+                                           class="mt-6 inline-flex items-center gap-2 font-semibold text-black transition hover:text-black/70">
+                                            Read more
+                                            <i data-lucide="chevron-right" class="h-4 w-4"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                        <?php
+                            endwhile;
+                            wp_reset_postdata();
+                        endif;
+                        ?>
+                    </div>
+
+                    <?php
+                    $button_label = get_sub_field('button_label');
+                    $button_link = get_sub_field('button_link');
+                    if ($button_link && $button_label) : ?>
+                        <div class="flex items-center justify-end">
+                            <a href="<?php echo esc_url($button_link); ?>" 
+                               class="mt-10 inline-flex items-center rounded-lg border border-black px-6 py-3 text-center font-semibold text-black transition hover:bg-black/10 md:mt-14 lg:mt-16">
+                                <?php echo esc_html($button_label); ?>
+                            </a>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </section>
+        <?php endwhile; ?>
     <?php endif; ?>
 </article>

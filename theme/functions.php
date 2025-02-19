@@ -187,13 +187,14 @@ function _htl_scripts() {
     wp_enqueue_script('lucide-icons-init', 'https://unpkg.com/lucide@latest/dist/umd/lucide.min.js', array('lucide-icons'), null, true);
     
     // Enqueue theme styles
-    wp_enqueue_style('_htl-style', get_template_directory_uri() . '/style.css', array(), _HTL_VERSION);
+    wp_enqueue_style('_htl-style', get_stylesheet_uri(), array(), _HTL_VERSION);
     
     // Enqueue Fluent Forms custom styles
     wp_enqueue_style('_htl-fluent-forms', get_template_directory_uri() . '/assets/css/fluent-forms.css', array(), _HTL_VERSION);
 
     // Enqueue theme scripts
-    wp_enqueue_script('_htl-script', get_template_directory_uri() . '/js/script.min.js', array(), _HTL_VERSION, true);
+    wp_enqueue_script('jquery');
+    wp_enqueue_script('_htl-script', get_template_directory_uri() . '/js/script.min.js', array('jquery'), _HTL_VERSION, true);
 
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
@@ -301,6 +302,18 @@ function _htl_social_media_customizer($wp_customize) {
 add_action('customize_register', '_htl_social_media_customizer');
 
 /**
+ * Set posts per page for blog
+ */
+function _htl_set_posts_per_page($query) {
+    if (!is_admin() && $query->is_main_query()) {
+        if (is_home() || is_archive()) {
+            $query->set('posts_per_page', 20);
+        }
+    }
+}
+add_action('pre_get_posts', '_htl_set_posts_per_page');
+
+/**
  * Custom template tags for this theme.
  */
 require get_template_directory() . '/inc/template-tags.php';
@@ -318,8 +331,43 @@ require get_template_directory() . '/inc/customizer.php';
 // Icon functions.
 require get_template_directory() . '/inc/icon-functions.php';
 
-// Include custom mega menu walker
-require_once get_template_directory() . '/inc/class-htl-mega-menu-walker.php';
+// Include custom menu walkers
+require get_template_directory() . '/inc/class-htl-mega-menu-walker.php';
+require get_template_directory() . '/inc/class-htl-mobile-menu-walker.php';
 
 // Include ACF Blocks registration
 require_once get_template_directory() . '/inc/blocks.php';
+
+/**
+ * Custom pagination function
+ */
+function _htl_custom_pagination() {
+    global $wp_query;
+    
+    if ($wp_query->max_num_pages <= 1) return;
+
+    $big = 999999999;
+    $pages = paginate_links(array(
+        'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+        'format' => '?paged=%#%',
+        'current' => max(1, get_query_var('paged')),
+        'total' => $wp_query->max_num_pages,
+        'type' => 'array',
+        'prev_text' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="15 18 9 12 15 6"></polyline></svg>',
+        'next_text' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="9 18 15 12 9 6"></polyline></svg>',
+    ));
+
+    if (is_array($pages)) {
+        echo '<nav class="flex items-center justify-center space-x-2">';
+        foreach ($pages as $page) {
+            $active = strpos($page, 'current') !== false;
+            $class = $active 
+                ? 'bg-black text-white' 
+                : 'text-gray-600 hover:text-black hover:bg-gray-100';
+            echo '<div class="' . $class . ' inline-flex h-8 w-8 items-center justify-center rounded-lg text-sm font-semibold transition-colors">';
+            echo str_replace('page-numbers', '', $page);
+            echo '</div>';
+        }
+        echo '</nav>';
+    }
+}

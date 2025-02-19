@@ -10,6 +10,10 @@ class HTL_Mega_Menu_Walker extends Walker_Nav_Menu {
         $classes = empty($item->classes) ? array() : (array) $item->classes;
         $classes[] = 'menu-item-' . $item->ID;
 
+        if ($args->walker->has_children) {
+            $classes[] = 'menu-item-has-children';
+        }
+
         // Base classes for menu items
         $item_classes = array(
             'relative', // For dropdown positioning
@@ -35,19 +39,19 @@ class HTL_Mega_Menu_Walker extends Walker_Nav_Menu {
 
         $output .= '<div' . $id . $class_names . '>';
 
-        // Link attributes with hover effect for dropdown items
+        // Link attributes
         $atts = array(
             'title'  => !empty($item->attr_title) ? $item->attr_title : '',
             'target' => !empty($item->target) ? $item->target : '',
             'rel'    => !empty($item->xfn) ? $item->xfn : '',
-            'href'   => !empty($item->url) ? $item->url : '',
+            'href'   => !empty($item->url) ? $item->url : '#',
             'class'  => 'flex items-center py-2 text-mine-shaft rounded-md transition-all duration-200 whitespace-nowrap w-full' . 
-                       ($depth === 0 ? ' lg:py-6' : ' hover:bg-pippin hover:bg-opacity-10 px-3') .
+                       ($depth === 0 ? ' lg:py-6 justify-between lg:inline-flex lg:space-x-2' : ' hover:bg-pippin hover:bg-opacity-10 px-3') .
                        (in_array('current-menu-item', $classes) ? ' text-pippin' : ' hover:text-pippin')
         );
 
-        if ($depth === 0) {
-            $atts['class'] .= ' justify-between lg:inline-flex lg:space-x-2';
+        if ($args->walker->has_children) {
+            $atts['tabindex'] = '0';
         }
 
         $attributes = '';
@@ -81,14 +85,14 @@ class HTL_Mega_Menu_Walker extends Walker_Nav_Menu {
     public function start_lvl(&$output, $depth = 0, $args = null) {
         $classes = array(
             'sub-menu',
-            'invisible opacity-0 transition-all duration-200',
-            'lg:absolute lg:left-0 lg:top-full lg:z-50 lg:min-w-[240px] lg:group-hover:visible lg:group-hover:opacity-100',
+            'lg:absolute lg:left-0 lg:top-full lg:z-50 lg:min-w-[240px] lg:invisible lg:opacity-0 lg:group-hover:visible lg:group-hover:opacity-100',
             'bg-white border border-gallery shadow-lg rounded-md',
             $depth === 0 ? 'lg:mt-0' : 'lg:left-full lg:top-0 lg:ml-1',
+            'transition-all duration-200'
         );
 
         $class_names = implode(' ', apply_filters('nav_menu_submenu_css_class', $classes, $args, $depth));
-
+        
         $output .= "<div class=\"$class_names\">";
         $output .= "<div class=\"p-4\">";
     }

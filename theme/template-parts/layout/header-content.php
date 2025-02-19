@@ -10,87 +10,162 @@ $logo_url = wp_get_attachment_image_src(get_theme_mod('custom_logo'), 'full');
 ?>
 
 <section id="site-header" class="fixed <?php echo is_admin_bar_showing() ? 'top-8 lg:top-9' : 'top-0'; ?> z-50 w-full border-b border-gallery bg-white/95 backdrop-blur-sm transition-all duration-200">
-    <div class="flex w-full items-center justify-between px-5 md:px-8 lg:px-[5%]">
-        <!-- Logo and Mobile Menu Toggle -->
-        <div class="flex w-auto items-center justify-between gap-8">
-            <div class="flex items-center gap-4">
-                <a href="<?php echo esc_url(home_url('/')); ?>" class="site-logo py-4 lg:py-6">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/logo/web-logo-black (2).svg" 
-                         alt="<?php echo get_bloginfo('name'); ?>" 
-                         class="h-10 w-auto md:h-12" />
-                </a>
-                <span class="hidden text-lg font-medium text-mine-shaft lg:block">Hebert-Thomas Law, PLLC</span>
-            </div>
-
-            <!-- Mobile Menu Toggle -->
-            <button class="flex h-14 w-14 items-center justify-center rounded-full bg-cod-gray hover:bg-mine-shaft lg:hidden" 
-                    aria-label="Toggle Menu" 
-                    data-toggle="mobile-menu"
-                    aria-expanded="false">
-                <i data-lucide="menu" class="size-8 text-white"></i>
-            </button>
+    <div class="w-full flex items-center justify-between gap-4 px-5 md:px-8 lg:px-4 xl:px-8 2xl:px-[5%]">
+        <!-- Logo Section -->
+        <div class="flex items-center gap-4 lg:w-[250px] xl:w-[280px] 2xl:w-[350px]">
+            <a href="<?php echo esc_url(home_url('/')); ?>" class="site-logo shrink-0 py-4 lg:py-6">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/logo/web-logo-black (2).svg" 
+                     alt="<?php echo get_bloginfo('name'); ?>" 
+                     class="h-10 w-auto md:h-12" />
+            </a>
+            <span class="hidden whitespace-nowrap text-lg font-medium text-mine-shaft lg:text-sm xl:text-base 2xl:text-lg lg:block">Hebert-Thomas Law, PLLC</span>
         </div>
 
-        <!-- Navigation Menu -->
-        <div class="mobile-menu invisible absolute left-0 top-full h-[calc(100vh-100%)] w-full transform overflow-auto bg-white opacity-0 transition-all duration-300 ease-in-out lg:visible lg:relative lg:h-auto lg:flex-1 lg:translate-x-0 lg:overflow-visible lg:bg-transparent lg:opacity-100" 
-             style="--height-closed:0; --height-open:calc(100vh - var(--header-height, 100%))">
-            <div class="px-5 md:px-8 lg:px-0">
-                <?php if (has_nav_menu('primary')) : ?>
-                    <nav class="primary-navigation py-6 lg:py-0" role="navigation" aria-label="<?php esc_attr_e('Primary Navigation', '_htl'); ?>">
-                        <?php
-                        wp_nav_menu(array(
-                            'theme_location' => 'primary',
-                            'menu_class' => 'primary-menu flex flex-col lg:flex-row lg:items-center lg:justify-center',
-                            'container' => false,
-                            'items_wrap' => '<div class="%2$s">%3$s</div>',
-                            'walker' => new HTL_Mega_Menu_Walker()
-                        ));
-                        ?>
-                    </nav>
-                <?php endif; ?>
-
-                <!-- Mobile CTA Links -->
-                <div class="mt-6 flex w-full flex-col gap-y-4 pb-24 lg:hidden">
-                    <a href="<?php echo esc_url(get_theme_mod('header_cta_primary_url', '#')); ?>" 
-                       class="inline-flex items-center justify-center gap-3 rounded-md border border-gallery bg-white px-5 py-3 text-mine-shaft transition-colors hover:bg-gallery">
-                        <?php echo esc_html(get_theme_mod('header_cta_primary_text', 'Contact Us')); ?>
-                        <i data-lucide="arrow-right" class="size-4"></i>
-                    </a>
-                    <a href="<?php echo esc_url(get_theme_mod('header_cta_secondary_url', '#')); ?>" 
-                       class="inline-flex items-center justify-center gap-3 rounded-md border border-gallery bg-cod-gray px-5 py-3 text-white transition-colors hover:bg-mine-shaft">
-                        <?php echo esc_html(get_theme_mod('header_cta_secondary_text', 'Schedule Consultation')); ?>
-                        <i data-lucide="arrow-right" class="size-4"></i>
-                    </a>
-                </div>
-            </div>
+        <!-- Desktop Navigation -->
+        <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center">
+            <?php if (has_nav_menu('primary')) : ?>
+                <nav class="primary-navigation" role="navigation" aria-label="<?php esc_attr_e('Primary Navigation', '_htl'); ?>">
+                    <?php
+                    wp_nav_menu(array(
+                        'theme_location' => 'primary',
+                        'menu_class' => 'flex items-center gap-3 lg:text-sm xl:text-base 2xl:gap-6',
+                        'container' => false,
+                        'walker' => new HTL_Mega_Menu_Walker()
+                    ));
+                    ?>
+                </nav>
+            <?php endif; ?>
         </div>
 
-        <!-- Desktop CTA Links -->
-        <div class="hidden lg:flex lg:gap-4">
+        <!-- Desktop CTA Buttons -->
+        <div class="hidden lg:flex lg:w-[250px] xl:w-[280px] 2xl:w-[350px] lg:items-center lg:justify-end lg:gap-2 xl:gap-3">
             <a href="<?php echo esc_url(get_theme_mod('header_cta_primary_url', '#')); ?>" 
-               class="inline-flex items-center justify-center gap-3 rounded-md border border-gallery bg-white px-5 py-2.5 text-mine-shaft transition-colors hover:bg-gallery">
+               class="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-md border border-gallery bg-white px-2.5 py-1.5 lg:text-sm xl:text-base text-mine-shaft transition-colors hover:bg-gallery xl:px-3 xl:py-2 2xl:px-4 2xl:py-2.5">
                 <?php echo esc_html(get_theme_mod('header_cta_primary_text', 'Contact Us')); ?>
-                <i data-lucide="arrow-right" class="size-4"></i>
+                <i data-lucide="arrow-right" class="size-3.5 lg:size-4 shrink-0"></i>
             </a>
             <a href="<?php echo esc_url(get_theme_mod('header_cta_secondary_url', '#')); ?>" 
-               class="inline-flex items-center justify-center gap-3 rounded-md border border-gallery bg-cod-gray px-5 py-2.5 text-white transition-colors hover:bg-mine-shaft">
+               class="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-md border border-gallery bg-cod-gray px-2.5 py-1.5 lg:text-sm xl:text-base text-white transition-colors hover:bg-cod-gray hover:text-white xl:px-3 xl:py-2 2xl:px-4 2xl:py-2.5">
                 <?php echo esc_html(get_theme_mod('header_cta_secondary_text', 'Schedule Consultation')); ?>
-                <i data-lucide="arrow-right" class="size-4"></i>
+                <i data-lucide="arrow-right" class="size-3.5 lg:size-4 shrink-0"></i>
             </a>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button type="button" class="mobile-menu-toggle lg:hidden inline-flex items-center justify-center rounded-md p-2.5 text-mine-shaft" aria-controls="mobile-menu" aria-expanded="false">
+            <span class="sr-only">Open main menu</span>
+            <i data-lucide="menu" class="block size-6" aria-hidden="true"></i>
+        </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="lg:hidden hidden" id="mobile-menu">
+        <div class="space-y-1 px-4 pb-3 pt-2">
+            <?php if (has_nav_menu('primary')) : ?>
+                <nav class="mobile-navigation" role="navigation" aria-label="<?php esc_attr_e('Mobile Navigation', '_htl'); ?>">
+                    <?php
+                    wp_nav_menu(array(
+                        'theme_location' => 'primary',
+                        'menu_class' => 'space-y-2',
+                        'container' => false,
+                        'walker' => new HTL_Mega_Menu_Walker()
+                    ));
+                    ?>
+                </nav>
+            <?php endif; ?>
+            
+            <!-- Mobile CTA Buttons -->
+            <div class="mt-4 flex flex-col gap-2">
+                <a href="<?php echo esc_url(get_theme_mod('header_cta_primary_url', '#')); ?>" 
+                   class="inline-flex items-center justify-center gap-1.5 rounded-md border border-gallery bg-white px-4 py-2 text-mine-shaft">
+                    <?php echo esc_html(get_theme_mod('header_cta_primary_text', 'Contact Us')); ?>
+                    <i data-lucide="arrow-right" class="size-4"></i>
+                </a>
+                <a href="<?php echo esc_url(get_theme_mod('header_cta_secondary_url', '#')); ?>" 
+                   class="inline-flex items-center justify-center gap-1.5 rounded-md border border-gallery bg-cod-gray px-4 py-2 text-white">
+                    <?php echo esc_html(get_theme_mod('header_cta_secondary_text', 'Schedule Consultation')); ?>
+                    <i data-lucide="arrow-right" class="size-4"></i>
+                </a>
+            </div>
         </div>
     </div>
 </section>
 
+<style>
+/* Desktop submenu styles */
+@media (min-width: 1024px) {
+    .primary-menu > li {
+        position: relative;
+    }
+    .primary-menu > li > .sub-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 200px;
+        background: white;
+        padding: 0.5rem 0;
+        border: 1px solid #E5E7EB;
+        border-radius: 0.375rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.2s ease-in-out;
+    }
+    .primary-menu > li:hover > .sub-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    .primary-menu .sub-menu li {
+        padding: 0.5rem 1rem;
+    }
+    .primary-menu .sub-menu li:hover {
+        background-color: #F3F4F6;
+    }
+}
+
+/* Mobile menu styles */
+@media (max-width: 1023px) {
+    .menu-item-has-children > .sub-menu {
+        display: none;
+        transition: all 0.3s ease-in-out;
+    }
+    
+    .menu-item-has-children.is-active > .sub-menu {
+        display: block;
+    }
+    
+    .menu-item-has-children.is-active > a [data-lucide="chevron-down"] {
+        transform: rotate(180deg);
+    }
+    
+    [data-lucide="chevron-down"] {
+        transition: transform 0.3s ease-in-out;
+    }
+}
+
+/* Desktop menu styles */
+@media (min-width: 1024px) {
+    .menu-item-has-children:hover > .sub-menu {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+}
+</style>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Lucide icons
+    if (window.lucide) {
+        window.lucide.createIcons();
+    }
+
     const header = document.getElementById('site-header');
-    const mobileMenuToggle = document.querySelector('[data-toggle="mobile-menu"]');
-    const mobileMenu = document.querySelector('.mobile-menu');
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
     let isOpen = false;
     let lastScroll = 0;
-
-    // Initialize Lucide icons
-    lucide.createIcons();
 
     // Set initial header height variable
     document.documentElement.style.setProperty('--header-height', header.offsetHeight + 'px');
@@ -126,24 +201,56 @@ document.addEventListener('DOMContentLoaded', function() {
         lastScroll = currentScroll;
     });
 
-    mobileMenuToggle?.addEventListener('click', function() {
-        isOpen = !isOpen;
-        this.setAttribute('aria-expanded', isOpen);
+    // Mobile menu toggle
+    const menuIcon = mobileMenuToggle.querySelector('[data-lucide]');
+
+    mobileMenuToggle.addEventListener('click', function() {
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !isExpanded);
+        mobileMenu.classList.toggle('hidden');
         
-        if (isOpen) {
-            mobileMenu.classList.remove('invisible', 'opacity-0', 'translate-x-full');
-            document.body.style.overflow = 'hidden';
-            this.innerHTML = '<i data-lucide="x" class="size-8 text-white"></i>';
-            // Ensure header is visible when menu is open
-            header.classList.remove('-translate-y-full');
-        } else {
-            mobileMenu.classList.add('invisible', 'opacity-0', 'translate-x-full');
-            document.body.style.overflow = '';
-            this.innerHTML = '<i data-lucide="menu" class="size-8 text-white"></i>';
+        // Toggle icon
+        menuIcon.setAttribute('data-lucide', isExpanded ? 'menu' : 'x');
+        
+        if (window.lucide) {
+            window.lucide.createIcons();
         }
-        
-        // Re-initialize icons after DOM change
-        lucide.createIcons();
+    });
+
+    // Handle mobile dropdown menus
+    const menuItems = document.querySelectorAll('.menu-item-has-children > a');
+    
+    menuItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            if (window.innerWidth >= 1024) return;
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const parent = this.parentElement;
+            const wasActive = parent.classList.contains('is-active');
+            
+            // Close all dropdowns
+            document.querySelectorAll('.menu-item-has-children').forEach(item => {
+                item.classList.remove('is-active');
+            });
+            
+            // Toggle current dropdown
+            if (!wasActive) {
+                parent.classList.add('is-active');
+            }
+        });
+    });
+
+    // Close mobile menu on window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth >= 1024) {
+            mobileMenu.classList.add('hidden');
+            mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            menuIcon.setAttribute('data-lucide', 'menu');
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        }
     });
 
     // Close menu on window resize if open (e.g., when switching to desktop view)

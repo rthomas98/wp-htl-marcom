@@ -8,12 +8,12 @@
     <?php if (have_rows('header_71')) : ?>
         <?php while (have_rows('header_71')) : the_row(); ?>
             <section class="px-[5%] py-16 md:py-24 lg:py-28">
-                <div class="container">
+                <div class="container mx-auto">
                     <div class="flex flex-col">
                         <div class="rb-12 mb-12 md:mb-18 lg:mb-20">
-                            <div class="w-full max-w-lg">
+                            <div class="w-full">
                                 <?php if (get_sub_field('title')) : ?>
-                                    <h1 class="mb-5 text-6xl font-bold md:mb-6 md:text-8xl lg:text-9xl">
+                                    <h1 class="mb-5 text-6xl font-bold md:mb-6 md:text-6xl lg:text-7xl">
                                         <?php the_sub_field('title'); ?>
                                     </h1>
                                 <?php endif; ?>
@@ -67,7 +67,7 @@
     <?php if (have_rows('layout_16')) : ?>
         <?php while (have_rows('layout_16')) : the_row(); ?>
             <section class="px-[5%] py-16 md:py-24 lg:py-28 bg-pippin">
-                <div class="container">
+                <div class="container mx-auto">
                     <div class="grid grid-cols-1 items-center gap-12 md:grid-cols-2 lg:gap-x-20">
                         <div>
                             <?php if (get_sub_field('sub_title')) : ?>
@@ -142,7 +142,7 @@
     <?php if (have_rows('layout_241')) : ?>
         <?php while (have_rows('layout_241')) : the_row(); ?>
             <section class="px-[5%] py-16 md:py-24 lg:py-28">
-                <div class="container">
+                <div class="container mx-auto">
                     <div class="flex flex-col">
                         <div class="rb-12 mb-12 md:mb-18 lg:mb-20">
                             <div class="w-full max-w-lg">
@@ -216,7 +216,7 @@
     <?php if (have_rows('layout_253')) : ?>
         <?php while (have_rows('layout_253')) : the_row(); ?>
             <section class="bg-cod-gray px-[5%] py-16 md:py-24 lg:py-28">
-                <div class="container">
+                <div class="container mx-auto">
                     <div class="grid auto-cols-fr grid-cols-1 items-start justify-start gap-y-12 md:grid-cols-[0.5fr_1fr] md:gap-x-12 md:gap-y-16 lg:gap-x-20">
                         <div>
                             <?php if (get_sub_field('sub_title')) : ?>
@@ -288,7 +288,7 @@
     <?php if (have_rows('layout_271')) : ?>
         <?php while (have_rows('layout_271')) : the_row(); ?>
             <section class="relative px-[5%] py-16 md:py-24 lg:py-28">
-                <div class="container relative z-10">
+                <div class="container mx-auto relative z-10">
                     <div class="mb-12 max-w-lg text-start text-white md:mb-18 lg:mb-20">
                         <?php if (get_sub_field('sub_title')) : ?>
                             <p class="mb-3 font-semibold md:mb-4"><?php the_sub_field('sub_title'); ?></p>
@@ -372,7 +372,7 @@
     <?php if (have_rows('faq_3')) : ?>
         <?php while (have_rows('faq_3')) : the_row(); ?>
             <section class="px-[5%] py-16 md:py-24 lg:py-28">
-                <div class="container grid grid-cols-1 gap-y-12 md:grid-cols-2 md:gap-x-12 lg:grid-cols-[.75fr,1fr] lg:gap-x-20">
+                <div class="container mx-auto grid grid-cols-1 gap-y-12 md:grid-cols-2 md:gap-x-12 lg:grid-cols-[.75fr,1fr] lg:gap-x-20">
                     <div>
                         <?php if (get_sub_field('title')) : ?>
                             <h2 class="mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
@@ -400,35 +400,59 @@
 
                                 <?php if (have_rows('faqs')) : ?>
                                 </div>
-                                <div class="divide-y divide-black/10">
-                                    <?php while (have_rows('faqs')) : the_row(); ?>
-                                        <div class="accordion-item" x-data="{ open: false }">
+                                <div class="mt-8 flex flex-col gap-4 md:mt-10">
+                                    <?php $faq_index = 0; while (have_rows('faqs')) : the_row(); ?>
+                                        <div class="faq-item rounded-lg border border-black/10 p-5 md:p-6">
                                             <button 
-                                                @click="open = !open" 
-                                                class="flex w-full items-center justify-between py-4 text-left font-semibold transition md:py-5 md:text-lg"
-                                            >
-                                                <span><?php the_sub_field('question'); ?></span>
-                                                <i 
-                                                    data-lucide="chevron-down" 
-                                                    class="size-5 transform transition-transform" 
-                                                    :class="{ 'rotate-180': open }"
-                                                ></i>
+                                                class="faq-trigger flex w-full items-center justify-between text-left"
+                                                aria-expanded="false"
+                                                aria-controls="faq-content-<?php echo $faq_index; ?>">
+                                                <h3 class="text-lg font-semibold"><?php the_sub_field('question'); ?></h3>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon size-5 shrink-0 transition-transform">
+                                                    <path d="m6 9 6 6 6-6"/>
+                                                </svg>
                                             </button>
                                             <div 
-                                                x-show="open" 
-                                                x-transition:enter="transition ease-out duration-200"
-                                                x-transition:enter-start="opacity-0 -translate-y-2"
-                                                x-transition:enter-end="opacity-100 translate-y-0"
-                                                x-transition:leave="transition ease-in duration-150"
-                                                x-transition:leave-start="opacity-100 translate-y-0"
-                                                x-transition:leave-end="opacity-0 -translate-y-2"
-                                                class="pb-4 md:pb-6"
-                                            >
-                                                <p class="text-black/70"><?php the_sub_field('answer'); ?></p>
+                                                id="faq-content-<?php echo $faq_index; ?>"
+                                                class="faq-content mt-4 hidden">
+                                                <p><?php the_sub_field('answer'); ?></p>
                                             </div>
                                         </div>
-                                    <?php endwhile; ?>
+                                    <?php $faq_index++; endwhile; ?>
                                 </div>
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        const faqItems = document.querySelectorAll('.faq-item');
+                                        
+                                        faqItems.forEach(item => {
+                                            const trigger = item.querySelector('.faq-trigger');
+                                            const content = item.querySelector('.faq-content');
+                                            const icon = item.querySelector('.faq-icon');
+                                            
+                                            trigger.addEventListener('click', () => {
+                                                const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+                                                
+                                                // Close all other FAQs
+                                                faqItems.forEach(otherItem => {
+                                                    if (otherItem !== item) {
+                                                        const otherTrigger = otherItem.querySelector('.faq-trigger');
+                                                        const otherContent = otherItem.querySelector('.faq-content');
+                                                        const otherIcon = otherItem.querySelector('.faq-icon');
+                                                        
+                                                        otherTrigger.setAttribute('aria-expanded', 'false');
+                                                        otherContent.classList.add('hidden');
+                                                        otherIcon.style.transform = 'rotate(0deg)';
+                                                    }
+                                                });
+                                                
+                                                // Toggle current FAQ
+                                                trigger.setAttribute('aria-expanded', !isExpanded);
+                                                content.classList.toggle('hidden');
+                                                icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+                                            });
+                                        });
+                                    });
+                                </script>
                             <?php endif; ?>
                         <?php endwhile; ?>
                     <?php endif; ?>
@@ -444,7 +468,7 @@
                     <div class="relative flex min-h-[500px] flex-col justify-center">
                         <div class="relative z-10 w-full max-w-lg">
                             <?php if (get_sub_field('title')) : ?>
-                                <h2 class="mb-5 text-5xl font-bold text-white md:mb-6 md:text-7xl lg:text-8xl">
+                                <h2 class="mb-5 text-5xl font-bold text-white md:mb-6 md:text-5xl lg:text-6xl">
                                     <?php the_sub_field('title'); ?>
                                 </h2>
                             <?php endif; ?>
